@@ -2,8 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "app.py": {
-      "runtime": "python3.12",
-      "includeFiles": "index.html"
+      "maxDuration": 30,
+      "includeFiles": "{index.html,favicon.ico}"
     }
   },
   "routes": [
@@ -12,3 +12,4 @@
     { "src": "/(.*)", "dest": "app.py" }
   ]
 }
+
