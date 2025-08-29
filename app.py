@@ -45,12 +45,13 @@ GEMINI_DEFAULT_MODEL = "gemini-2.5-flash"
 @app.get("/", response_class=HTMLResponse)
 async def serve_frontend():
     """Serve the main HTML interface"""
+    html_path = os.path.join(os.path.dirname(__file__), "index.html")
     try:
-        with open("index.html", "r", encoding="utf-8") as f:
+        with open(html_path, "r", encoding="utf-8") as f:
             return HTMLResponse(content=f.read())
     except FileNotFoundError:
         return HTMLResponse(
-            content="<h1>Frontend not found</h1><p>Please ensure index.html is in the same directory as app.py</p>",
+            content="<h1>Frontend not found</h1><p>Please ensure index.html is next to app.py</p>",
             status_code=404,
         )
 
@@ -613,3 +614,4 @@ def _fit_into_box(img: Dict[str, int], box: Dict[str, int]) -> Dict[str, int]:
     nl = box["left"] + (bw - nw) // 2
     nt = box["top"] + (bh - nh) // 2
     return _rect(nl, nt, nw, nh)
+
